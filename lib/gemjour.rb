@@ -118,7 +118,7 @@ show <server>
     host = find(name)
 
     unless host
-      puts "ERROR: Unable to find server named '#{user}'"
+      puts "ERROR: Unable to find server named '#{name}'"
       return
     end
 
