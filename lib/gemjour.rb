@@ -84,6 +84,23 @@ show <server>
 
     system "gem list -r --source=http://#{host.host}:#{host.port}"
   end
+  
+  def self.diff(name)
+    host = find(name)
+
+    unless host
+      puts "ERROR: Unable to find server named '#{name}'"
+      return
+    end
+    
+    require "tempfile"
+    local_gems, remote_gems = Tempfile.new("local_gems"), Tempfile.new("remote_gems")
+    local_gems.print(`gem list --no-versions`)
+    local_gems.close
+    remote_gems.print(`gem list --no-versions -r --source=http://#{host.host}:#{host.port}`)
+    remote_gems.close
+    system "diff -u #{remote_gems.path} #{local_gems.path}"
+  end
 
   def self.install(name, gem)
     host = find(name)

@@ -12,6 +12,8 @@ begin
     Gemjour.serve(*ARGV)
   when "list"
     Gemjour.list(*ARGV)
+  when "diff"
+    Gemjour.diff(*ARGV)
   when "install"
     Gemjour.install(*ARGV)
   else
