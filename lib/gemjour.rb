@@ -99,7 +99,7 @@ show <server>
     local_gems.close
     remote_gems.print(`gem list --no-versions -r --source=http://#{host.host}:#{host.port}`)
     remote_gems.close
-    system "diff -u #{remote_gems.path} #{local_gems.path}"
+    system "diff -u #{local_gems.path} #{remote_gems.path}"
   end
 
   def self.install(name, gem)
