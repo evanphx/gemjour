@@ -18,6 +18,8 @@ Server and install gems over Bonjour.
   alice$ gem install blah.gem; gitjour serve
   bob$ gemjour install alice blah
 
+Prefix the cmds with "sudo" as necessary.
+
 == Awesome!
 
 You know it.
