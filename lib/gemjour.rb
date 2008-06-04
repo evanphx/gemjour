@@ -85,7 +85,7 @@ show <server>
     system "gem list -r --source=http://#{host.host}:#{host.port}"
   end
   
-  def self.diff(name)
+  def self._diff(name)
     host = find(name)
 
     unless host
@@ -95,11 +95,23 @@ show <server>
     
     require "tempfile"
     local_gems, remote_gems = Tempfile.new("local_gems"), Tempfile.new("remote_gems")
-    local_gems.print(`gem list --no-versions`)
+    local_gems.print(`gem list --no-versions --no-verbose`)
     local_gems.close
-    remote_gems.print(`gem list --no-versions -r --source=http://#{host.host}:#{host.port}`)
+    remote_gems.print(`gem list --no-versions --no-verbose -r --source=http://#{host.host}:#{host.port}`)
     remote_gems.close
-    system "diff -u #{local_gems.path} #{remote_gems.path}"
+    `diff -u #{local_gems.path} #{remote_gems.path}`
+  end
+
+  def self.diff(name)
+    puts _diff(name)
+  end
+  
+  def self.install_diff(name)
+    gem_diff = _diff(name)
+    return unless gem_diff
+    gem_diff.scan(/^\+([\w_\-]+)/) do |match|
+      install(name, match)
+    end
   end
 
   def self.install(name, gem)

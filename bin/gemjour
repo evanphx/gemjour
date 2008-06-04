@@ -14,6 +14,8 @@ begin
     Gemjour.list(*ARGV)
   when "diff"
     Gemjour.diff(*ARGV)
+  when "install_diff"
+    Gemjour.install_diff(*ARGV)
   when "install"
     Gemjour.install(*ARGV)
   else
