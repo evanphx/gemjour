@@ -9,8 +9,9 @@ Server and install gems over Bonjour.
 
 == Usage
 
-  alice$ gemjour serve
-  bob$ gemjour show alice
+  alice$ gemjour serve		# publishes gems via bonjour
+	bob$ gemjour list  			# finds alice
+  bob$ gemjour list alice # shows alice's gems
 
   alice$ gem install blah.gem; gitjour serve
   bob$ gemjour install alice blah

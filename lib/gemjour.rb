@@ -54,7 +54,8 @@ show <server>
     host
   end
 
-  def self.list
+  def self.list(name = nil)
+    return show(name) if name
     hosts = []
 
     waiting = Thread.current
