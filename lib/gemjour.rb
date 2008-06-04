@@ -103,12 +103,12 @@ show <server>
   end
 
   def self.diff(name)
-    puts _diff(name)
+    return unless diff = _diff(name)
+    puts diff
   end
   
   def self.install_diff(name)
-    gem_diff = _diff(name)
-    return unless gem_diff
+    return unless gem_diff = _diff(name)
     gem_diff.scan(/^\+([\w_\-]+)/) do |match|
       install(name, match)
     end
