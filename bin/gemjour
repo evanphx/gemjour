@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require "rubygems"
+require "gemjour"
+
+begin
+
+  cmd = ARGV.shift
+
+  case cmd
+  when "serve"
+    Gemjour.serve(*ARGV)
+  when "list"
+    Gemjour.list
+  when "show"
+    Gemjour.show(*ARGV)
+  when "install"
+    Gemjour.install(*ARGV)
+  else
+    Gemjour.usage
+  end
+
+rescue => e
+  puts "ERROR: running '#{cmd}': #{e.message} (#{e.class})"
+  puts
+  Gemjour.usage
+end
